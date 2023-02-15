@@ -1,0 +1,26 @@
+version: '3'
+
+networks:
+ powerdns-net:
+     external:
+      name: powerdns-net
+
+services:
+  pdns:
+   image: pdns-sqlite:latest
+   tty: true
+   container_name: pdns-sqlite
+   restart: always
+   build: 
+    context: .
+    dockerfile: Dockerfile
+    args:
+      pdns_local_address: "0.0.0.0:5300"
+      pdns_local_port: "5300"
+      pdns_api_key: "1234abcd."
+      pdns_default_soa_name: "ns1.lab.local"
+   ports:
+    - "8080:80"
+   networks:
+      powerdns-net:
+        ipv4_address: 10.90.0.10
