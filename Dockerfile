@@ -121,10 +121,10 @@ version-string=anonymous\n\
 cache-ttl=10" > /etc/pdns/pdns.conf
 
 ## Dump Recursor Configuration
-RUN echo -e "\
-forward-zones-recurse=.=8.8.8.8 \n\
-local-address=127.0.0.1\n\
-local-port=5678" > /etc/pdns-recursor/recursor.conf
+#RUN echo -e "\
+#forward-zones-recurse=.=8.8.8.8 \n\
+#local-address=127.0.0.1\n\
+#local-port=5678" > /etc/pdns-recursor/recursor.conf
 
 # Database Configuration Files & Permissions
 RUN sqlite3 /var/lib/pdns/pdns.sqlite3 < /usr/share/doc/pdns-backend-sqlite/schema.sqlite3.sql
@@ -134,7 +134,7 @@ RUN chown 700 /var/lib/pdns/pdns.sqlite3
 ## PIP Upgrade 
 RUN pip3 install --upgrade pip
 
-## Install PDNS-admin Through GIT
+## Install PDNS-admin 
 RUN mkdir /data
 WORKDIR /data
 RUN pip3 install virtualenv 
